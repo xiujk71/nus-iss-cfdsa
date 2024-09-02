@@ -1,0 +1,30 @@
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}
+
+LABEL maintainer=tanyk
+LABEL build_on="Sept 2 2024"
+
+WORKDIR /app
+
+COPY main.js .
+COPY package.json . 
+COPY package-lock.json .
+COPY public public
+COPY views views
+
+# install node modules
+run npm ci
+
+# set env
+ENV APP_PORT=3000
+ENV INSTANCE_NAME="dov_bear"
+ENV INSTANCE_HASH="abc1234"
+
+EXPOSE ${APP_PORT}
+
+# Run app
+ENTRYPOINT node main
+
+# docker build command
+# docker -t <docker-username>/cfdsa-workshop01
