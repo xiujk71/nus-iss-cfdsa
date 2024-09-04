@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bggapp-svc
+  namespace: bggns
+  labels:
+    app: bgg
+    name: bggapp-svc
+spec:
+  type: LoadBalancer
+  selector: 
+    app: bgg
+    name: bggapp-svc
+  ports:
+  - port: 80
+    targetPort: 3000
